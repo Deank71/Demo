@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[Demos]
+(
+	[Id] INT NOT NULL PRIMARY KEY,
+	[Name] NCHAR(50) NULL,  
+    [IsActive] BIT NOT NULL DEFAULT 1, 
+    [CreationDate] DATETIME NOT NULL DEFAULT GETDATE()
+)
