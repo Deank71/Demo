@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Demo.Repository.UnitOfWork;
-using Demo.Repository.Repositories;
 
-namespace Repository
+using Microsoft.Extensions.Configuration;
+using Demo.Data.Models;
+
+namespace Demo.Data
 {
     public class Startup
     {
@@ -28,8 +28,6 @@ namespace Repository
         {
             services.AddDbContext<DemoDBContext>(options =>
        options.UseSqlServer(Configuration.GetConnectionString("DemoDBContext")));
-            services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
-            services.AddScoped(typeof(DemoRepository), typeof(DemoRepository));
 
         }
 
