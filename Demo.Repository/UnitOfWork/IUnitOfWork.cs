@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Demo.Repository.UnitOfWork
 {
-    interface IUnitOfWork: IDisposable
+   public interface IUnitOfWork: IDisposable
     {
-        IDemoRepository Demos { get; }
-        int Complete();
+       public IDemoRepository Demos { get; }
+        public IUserRepository User { get; }
+        public  int Complete();
     }
 
 }

@@ -13,5 +13,6 @@ namespace Demo.Data.Models
 
         }
         public DbSet<Demos> demos { get; set; }
+        public DbSet<User> user { get; set; }
     }
 }

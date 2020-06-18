@@ -16,9 +16,12 @@ namespace Demo.Repository.UnitOfWork
         {
             _context = context;
             Demos = new DemoRepository(_context);
+            User = new UserRepository(_context);
         }
 
         public IDemoRepository Demos { get; private set; }
+
+        public IUserRepository User { get; private set; }
 
         public int Complete()
         {
