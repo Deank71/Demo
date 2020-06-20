@@ -68,7 +68,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\components\chat\chat.routing.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\config.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\message.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\services\User.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\User.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

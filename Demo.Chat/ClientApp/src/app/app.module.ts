@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule, Routes  } from '@angular/router';
 import {ChatModule } from './components/chat/chat.module';
@@ -18,6 +18,13 @@ import { RegisterComponent } from './auth/containers/register/register.component
 import {SignalRService } from './services/signal-r.service'
 import { TokenInterceptor } from './auth/token.interceptor';
 import { EncrDecrService } from  './services/encr-decr.service';
+import { FriendsComponent } from './components/friends/friends.component';
+import { MyrequestsComponent } from './components/friends/myrequests/myrequests.component';
+import { RequestmeComponent } from './components/friends/requestme/requestme.component';
+import { ActiveComponent } from './components/friends/active/active.component';
+import { MatIconModule } from '@angular/material';
+import { MatDividerModule } from '@angular/material/divider';
+import { MaterialModule } from '../app/material-module';
 
 @NgModule({
   declarations: [
@@ -25,7 +32,11 @@ import { EncrDecrService } from  './services/encr-decr.service';
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
-    FetchDataComponent
+    FetchDataComponent,
+    FriendsComponent,
+    MyrequestsComponent,
+    RequestmeComponent,
+    ActiveComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -33,13 +44,18 @@ import { EncrDecrService } from  './services/encr-decr.service';
     AuthModule,
     FormsModule,
     ChatModule,
+    MatIconModule,
+    MatDividerModule,
+    MaterialModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
       { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
-      { path: 'chat', loadChildren:'./components/chat/chat.module#ChatModule', canActivate:[RandomGuard], canLoad:[RandomGuard] },
+      { path: 'chat', loadChildren: './components/chat/chat.module#ChatModule', canActivate: [RandomGuard], canLoad: [RandomGuard] },
+   
     ]),
     BrowserAnimationsModule
   ],
