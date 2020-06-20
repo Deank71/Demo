@@ -18,8 +18,12 @@ export class SignalRService {
     this.startConnection();  
   }
 
-  sendMessage(message: string) {
-    this._hubConnection.invoke('NewMessage', message);
+  sendMessage(group:string, message: string) {
+    this._hubConnection.invoke('NewMessage',group, message);
+  }
+
+  joinGroup(group: string) {
+    this._hubConnection.invoke('JoinGroup', group);
   }
 
   private createConnection() {
@@ -48,6 +52,7 @@ export class SignalRService {
   }
 
   private registerOnServerEvents(): void {
+  
     this._hubConnection.on('Send', (data: Message) => {
       this.messageReceived.emit(data);
     });

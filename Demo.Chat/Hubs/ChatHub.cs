@@ -28,14 +28,23 @@ namespace Demo.Chat.Hubs
             _config = config;
         }
         
-        public async Task NewMessage(string message)
+        public async Task NewMessage(string group, string message)
         {
 
             var response = new MessageDTO();
             response.From = Context.UserIdentifier.Trim();
             response.Message = message;
-           await Clients.All.SendAsync("Send", response);
+           await Clients.Group(group).SendAsync("Send", response);
+         //  await Clients.All.SendAsync("Send", response);
          //   await Clients.All.SendAsync("Send",  message);
+        }
+        public async Task JoinGroup(string roomName)
+        {
+            var response = new MessageDTO();
+            response.From = "ChatBot";
+            response.Message = Context.UserIdentifier.Trim() + " joined.";
+            await Groups.AddToGroupAsync(this.Context.ConnectionId, roomName);
+           await Clients.Group(roomName).SendAsync("Send", response);
         }
 
         protected string GetName(string token)

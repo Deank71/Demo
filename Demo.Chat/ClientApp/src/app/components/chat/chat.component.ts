@@ -17,6 +17,7 @@ export class ChatComponent implements OnInit {
   reponse: Message = { Message: "", From: "", Group: "" }
   notice: string = "";
   token: string = "";
+  group: string = "";
   constructor(private authService: AuthService, private signalRService: SignalRService, private formBuilder: FormBuilder, private router: Router, private encrDecrService: EncrDecrService) { }
   encryptKey: string = "password";
   encryptPhrase: string = "encrypted";
@@ -56,11 +57,16 @@ export class ChatComponent implements OnInit {
 
   SendMessage() {
     var encrypted = this.encrDecrService.set(this.encryptKey, this.f.message.value);
-    this.signalRService.sendMessage(encrypted);
+    this.signalRService.sendMessage(this.group, encrypted);
     this.messageForm.reset();
   }
   SaveCode(newCode) {
     this.encryptKey = newCode.value;
+  }
+
+  SaveGroup(selectedGroup) {
+    this.group = selectedGroup.value;
+    this.signalRService.joinGroup(this.group);
   }
  
 }
