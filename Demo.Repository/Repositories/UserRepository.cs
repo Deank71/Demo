@@ -33,6 +33,11 @@ namespace Demo.Repository.Repositories
             return false;
         }
 
+        public int? findUserByEmail(string emailAddress)
+        {
+            return _context.user.FirstOrDefault(x => x.EmailAddress == emailAddress).Id;
+        }
+
         public List<string> ListofUsers()
         {
             return _context.user.Select(x => x.UserName).ToList();

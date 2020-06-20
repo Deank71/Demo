@@ -10,6 +10,7 @@ namespace Demo.Repository.UnitOfWork
     {
        public IDemoRepository Demos { get; }
         public IUserRepository User { get; }
+        public IFriendsRepository Friends { get; }
         public  int Complete();
     }
 

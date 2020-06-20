@@ -13,6 +13,9 @@ namespace Demo.Repository.Repositories.Interfaces
 
         public bool CheckIfExist(string user, string email);
 
+        public int? findUserByEmail(string emailAddress);
+
         public User AuthenticateUser(string email, string password);
+
     }
 }
