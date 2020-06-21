@@ -1,0 +1,42 @@
+o
+<div class="header center">Chat Box</div>  
+<div class="row">
+  <div class="col-3">
+    <mat-form-field>
+      <input matInput type="text" id="code" placeholder="Message Code" autocomplete="off" #encryptKey (change)="SaveCode(encryptKey)">
+    </mat-form-field>
+  </div>
+  <div class="col-7">
+    The value entered in this field will be used to encrypt and decrypt your message(s).
+  </div>
+</div>
+<div class="row">
+  <div class="col-3">
+    <mat-form-field>
+      <input matInput type="text" id="group" placeholder="Join Group" autocomplete="off" #group (change)="SaveGroup(group)">
+    </mat-form-field>
+  </div>
+  <div class="col-7">
+    You will only be able to recieve and send messages from the group value entered here.
+  </div>
+</div> 
+  
+  <form [formGroup]="messageForm" (ngSubmit)="SendMessage()">
+    <mat-form-field>
+      <input matInput type="text" id="message" placeholder="Enter Message" autocomplete="off" formControlName="message" required>
+    </mat-form-field>
+
+    <div class="actions">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!messageForm.valid">Send</button>
+    </div>
+  </form>
+
+  {{token}}
+<textarea cols="75" rows="8">
+{{notice}}
+</textarea>
+
+
+
+
+

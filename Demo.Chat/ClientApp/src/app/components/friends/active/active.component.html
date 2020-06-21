@@ -1,0 +1,33 @@
+<br />
+<div *ngIf="requests.length > 0">
+  <div class="row">
+    <div class="col-sm-10">
+      <h1 mat-dialog-title>
+        Friend List<mat-icon matBadge="{{selectedUsers.length}}" matBadgeColor="primary">person</mat-icon>
+      </h1>
+    </div>
+    <div class="col-sm-1">
+      <span class="closePageIcon">
+        <i class="fas fa-times" id="AddressClose" (click)="onNoClick()"></i>
+      </span>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <br />
+  <div mat-dialog-content>
+
+    <form [formGroup]="myFriendForm" fxFlex fxLayout="column" autocomplete="off">
+      <mat-selection-list formControlName="userList" #SelectUsers class="SelectAllUsers" id="SelectUsers">
+        <mat-list-option #allmySelected (click)="toggleAllSelection()" [value]="0">All</mat-list-option>
+        <mat-list-option *ngFor="let user of requests" [value]="user.acceptorEmail" (click)="SelectUser(user)" class="UserListItem">
+          {{user.acceptorEmail}}
+        </mat-list-option>
+      </mat-selection-list>
+    </form>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button id="btnRemove" (click)="removeRequest()">Remove Friend</button>
+  </div>
+ 
+
+

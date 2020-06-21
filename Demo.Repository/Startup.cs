@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Demo.Repository.UnitOfWork;
 using Demo.Repository.Repositories;
+using Demo.Repository.Repositories.Interfaces;
 
 namespace Repository
 {
@@ -29,8 +30,8 @@ namespace Repository
             services.AddDbContext<DemoDBContext>(options =>
        options.UseSqlServer(Configuration.GetConnectionString("DemoDBContext")));
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
-            services.AddScoped(typeof(DemoRepository), typeof(DemoRepository));
-
+            services.AddScoped(typeof(IDemoRepository), typeof(DemoRepository));
+            services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
