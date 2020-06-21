@@ -49,6 +49,7 @@
     <None Remove="ClientApp\src\app\components\chat\widget-messages\widget-messages.component.spec.ts" />
     <None Remove="ClientApp\src\app\components\chat\widget-messages\widget-messages.component.ts" />
     <None Remove="ClientApp\src\app\config.ts" />
+    <None Remove="ClientApp\src\app\models\friend.ts" />
     <None Remove="ClientApp\src\app\models\message.ts" />
     <None Remove="ClientApp\src\app\services\User.ts" />
   </ItemGroup>
@@ -67,6 +68,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\components\chat\chat.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\chat\chat.routing.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\config.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\friend.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\message.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\User.ts" />
   </ItemGroup>

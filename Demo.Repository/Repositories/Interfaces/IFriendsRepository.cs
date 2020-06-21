@@ -16,6 +16,8 @@ namespace Demo.Repository.Repositories.Interfaces
 
         public List<Friends> ListofRequestedFriends(int Id);
 
+        public List<Friends> ListofFriendsRequesting(int Id);
+
         public Friends FindFriend(int Id);
 
     }

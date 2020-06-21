@@ -114,6 +114,11 @@ export class AuthService {
     }
   }
 
+  getUserId() {
+    this.decodeToken();
+    return this.decodedToken ? this.decodedToken.nameid : null;
+  }
+
   getExpiryTime() {
     this.decodeToken();
     return this.decodedToken ? this.decodedToken.exp : null;

@@ -26,6 +26,9 @@
             <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/friends']">Friends</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/counter']">Counter</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
@@ -38,7 +41,7 @@
             <a class="nav-link text-dark" (click)="LogOut()">logout</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="loggedin == false">
-            <a class="nav-link text-dark logout" [routerLink]="['/register']"  (click)="IsloggedIn()" style="cursor:pointer">Register</a>
+            <a class="nav-link text-dark logout" [routerLink]="['/register']" (click)="IsloggedIn()" style="cursor:pointer">Register</a>
           </li>
         </ul>
       </div>

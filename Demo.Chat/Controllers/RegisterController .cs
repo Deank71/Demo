@@ -47,17 +47,37 @@ namespace Demo.Chat.Controllers
             IActionResult response = Unauthorized();
             if (!_unitOfWork.User.CheckIfExist(register.UserName, register.EmailAddress))
             {
-                var refreshToken = Guid.NewGuid();
-                var tokenStr = GenerateJSONWebToken(register);
-                register.JWT = tokenStr;
-                register.refreshToken = refreshToken;
+                response = BuildToken(register);
                 _unitOfWork.User.Add(register);
-                response = Ok(new { jwt = tokenStr, refreshToken = refreshToken });
                 _unitOfWork.Complete();
-                return response;
             }
             else
-                return BadRequest("User or email already exists!");
+            {
+             var userId = (int)_unitOfWork.User.findUserByEmail(email);
+                var user = _unitOfWork.User.Get(userId);
+                if (user.UserName == null)
+                {
+                    register.Id = userId;
+                    user = register;
+                    response = BuildToken(register);  
+                    _unitOfWork.Complete();
+                }
+                else
+                    response = BadRequest("User or email already exists!");
+
+            }            
+            return response;
+        }
+
+        private IActionResult BuildToken(User register)
+        {
+            IActionResult response;
+            var refreshToken = Guid.NewGuid();
+            var tokenStr = GenerateJSONWebToken(register);
+            register.JWT = tokenStr;
+            register.refreshToken = refreshToken;
+            response = Ok(new { jwt = tokenStr, refreshToken = refreshToken });
+            return response;
         }
 
         private string GenerateJSONWebToken(User user)
@@ -66,6 +86,7 @@ namespace Demo.Chat.Controllers
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var claims = new[]
             {
+                 new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                 new Claim(JwtRegisteredClaimNames.Email, user.EmailAddress),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())

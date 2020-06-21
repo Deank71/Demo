@@ -33,6 +33,11 @@ namespace Demo.Repository.Repositories
             return _context.friends.Where(x => x.Requestor == Id || x.Acceptor == Id).ToList();
         }
 
+        public List<Friends> ListofFriendsRequesting(int Id)
+        {
+            return _context.friends.Where(x => (x.Acceptor == Id) && !x.IsActive).ToList();
+        }
+
         public List<Friends> ListofRequestedFriends(int Id)
         {
             return _context.friends.Where(x => (x.Requestor == Id || x.Acceptor == Id) && !x.IsActive).ToList();

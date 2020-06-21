@@ -35,7 +35,15 @@ namespace Demo.Repository.Repositories
 
         public int? findUserByEmail(string emailAddress)
         {
-            return _context.user.FirstOrDefault(x => x.EmailAddress == emailAddress).Id;
+            var user = _context.user.FirstOrDefault(x => x.EmailAddress.Trim() == emailAddress);
+
+            return user?.Id;
+
+
+            //if (user != null)
+            //    return (int)user.Id;
+            //else
+            //    return null;
         }
 
         public List<string> ListofUsers()

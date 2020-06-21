@@ -1,1 +1,33 @@
-<p>requestme works!</p>
+<div *ngIf="requests.length > 0">
+  <br />
+  <div class="row">
+    <div class="col-sm-10">
+      <h1 mat-dialog-title>
+        Friends Requesting Me <mat-icon matBadge="{{selectedUsers.length}}" matBadgeColor="primary">person</mat-icon>
+      </h1>
+    </div>
+    <div class="col-sm-1">
+      <span class="closePageIcon">
+        <i class="fas fa-times" id="AddressClose" (click)="onNoClick()"></i>
+      </span>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <br />
+  <div mat-dialog-content>
+
+    <form [formGroup]="friendRequestForm" fxFlex fxLayout="column" autocomplete="off">
+      <mat-selection-list formControlName="userList" #SelectUsers class="SelectAllUsers" id="SelectUsers">
+        <mat-list-option #allmySelected (click)="toggleAllSelection()" [value]="0">All</mat-list-option>
+        <mat-list-option *ngFor="let user of this.requests" [value]="user.requestorEmail" (click)="SelectUser(user)" class="UserListItem">
+          {{user.requestorEmail}}
+        </mat-list-option>
+      </mat-selection-list>
+    </form>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button id="btnAdd">Decline Request</button>
+    <button mat-button (click)="acceptRequest()" id="btnCancel">Accept Request</button>
+  </div>
+  <br />
+  </div>

@@ -25,6 +25,7 @@ import { ActiveComponent } from './components/friends/active/active.component';
 import { MatIconModule } from '@angular/material';
 import { MatDividerModule } from '@angular/material/divider';
 import { MaterialModule } from '../app/material-module';
+import { FriendsService } from './services/friends.service';
 
 @NgModule({
   declarations: [
@@ -55,11 +56,11 @@ import { MaterialModule } from '../app/material-module';
       { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
       { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
       { path: 'chat', loadChildren: './components/chat/chat.module#ChatModule', canActivate: [RandomGuard], canLoad: [RandomGuard] },
-   
+      { path: 'friends', component: FriendsComponent },
     ]),
     BrowserAnimationsModule
   ],
-  providers: [SignalRService, EncrDecrService,
+  providers: [SignalRService, EncrDecrService, FriendsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
