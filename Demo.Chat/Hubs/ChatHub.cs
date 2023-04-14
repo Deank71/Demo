@@ -32,7 +32,7 @@ namespace Demo.Chat.Hubs
         {
 
             var response = new MessageDTO();
-            response.From = Context.UserIdentifier.Trim();
+            response.From = Context.User.Claims.ToList()[1].Value.Trim();
             response.Message = message;
            await Clients.Group(group).SendAsync("Send", response);
          //  await Clients.All.SendAsync("Send", response);
@@ -42,7 +42,9 @@ namespace Demo.Chat.Hubs
         {
             var response = new MessageDTO();
             response.From = "ChatBot";
-            response.Message = Context.UserIdentifier.Trim() + " joined.";
+            var claims = Context.User.Claims;
+           // var test = claims.FirstOrDefault(x => x.Properties[].Value == "sub");
+            response.Message = Context.User.Claims.ToList()[1].Value.Trim() + " joined.";
             await Groups.AddToGroupAsync(this.Context.ConnectionId, roomName);
            await Clients.Group(roomName).SendAsync("Send", response);
         }
