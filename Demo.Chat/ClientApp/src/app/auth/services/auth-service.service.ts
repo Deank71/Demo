@@ -21,7 +21,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(user: { email: string, password: string }): Observable<boolean> {
-    return this.http.get<any>(`${config.apiUrl}/api/login?email=${user.email}&password=${user.password}`)
+    return this.http.get<any>(`${config.apiUrl}login?email=${user.email}&password=${user.password}`)
       .pipe(
         tap(tokens => this.doLoginUser(user.email, tokens)),
         mapTo(true),
@@ -32,7 +32,7 @@ export class AuthService {
   }
 
   register(user: {userName: string, email: string, password: string }): Observable<boolean> {
-    return this.http.get<any>(`${config.apiUrl}/api/register?userName=${user.userName}&email=${user.email}&password=${user.password}`)
+    return this.http.get<any>(`${config.apiUrl}register?userName=${user.userName}&email=${user.email}&password=${user.password}`)
       .pipe(
         tap(tokens => this.doLoginUser(user.email, tokens)),
         mapTo(true),
@@ -54,7 +54,7 @@ export class AuthService {
 
   logout() {
     this.doLogoutUser();
-    //return this.http.post<any>(`${config.apiUrl}/api/logout`, {
+    //return this.http.post<any>(`${config.apiUrl}logout`, {
     //  'refreshToken': this.getRefreshToken()
     //}).pipe(
     //  tap(() => this.doLogoutUser()),
@@ -74,7 +74,7 @@ export class AuthService {
     localStorage.removeItem(this.REFRESH_TOKEN);
   }
   getRefreshToken() {
-    return this.http.post<any>(`${config.apiUrl}/api/refresh`, {
+    return this.http.post<any>(`${config.apiUrl}refresh`, {
       'refreshToken': this.getRefreshToken()
     }).pipe(tap((tokens: Tokens) => {
       this.storeJwtToken(tokens.jwt);
@@ -90,7 +90,7 @@ export class AuthService {
   }
 
   refreshToken() {
-    return this.http.post<any>(`${config.apiUrl}/api/refresh`, {
+    return this.http.post<any>(`${config.apiUrl}refresh`, {
       'refreshToken': this.getRefreshToken()
     }).pipe(tap((tokens: Tokens) => {
       this.storeJwtToken(tokens.jwt);

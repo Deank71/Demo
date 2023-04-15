@@ -19,7 +19,7 @@ export class ChatComponent implements OnInit {
   token: string = "";
   group: string = "";
   constructor(private authService: AuthService, private signalRService: SignalRService, private formBuilder: FormBuilder, private router: Router, private encrDecrService: EncrDecrService) { }
-  encryptKey: string = "password";
+  encryptKey: string = "";
   encryptPhrase: string = "encrypted";
   public ngOnInit() {
     this.messageForm = this.formBuilder.group({
@@ -41,7 +41,12 @@ export class ChatComponent implements OnInit {
 
     // this.signalRService.connectionEstablished;
     this.signalRService.messageReceived.subscribe(data => {
-      this.notice = data.from + ": " + this.encrDecrService.get(this.encryptKey, data.message) + "\n" + this.notice;
+      if (data.from == "ChatBot") {
+        this.notice = data.from + ": " + data.message + "\n" + this.notice;
+      }
+      else {
+        this.notice = data.from + ": " + this.encrDecrService.get(this.encryptKey, data.message) + "\n" + this.notice;
+      }
     }, errors => this.handleErrors(errors));
 
 

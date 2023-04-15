@@ -19,7 +19,7 @@ namespace Demo.Repository.Repositories
 
         public User AuthenticateUser(string email, string password)
         {
-            return _context.user.FirstOrDefault(x => x.EmailAddress == email || x.Password == password);
+            return _context.user.FirstOrDefault(x => x.EmailAddress == email && x.Password == password);
 
         }
 

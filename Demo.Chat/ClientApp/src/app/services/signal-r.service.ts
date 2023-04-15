@@ -28,7 +28,7 @@ export class SignalRService {
 
   private createConnection() {
     this._hubConnection = new HubConnectionBuilder()
-      .withUrl(`${config.apiUrl}/ChatHub`, {
+      .withUrl(`${config.url}ChatHub`, {
         accessTokenFactory: () => {
           return this.authService.getJwtToken();
         }

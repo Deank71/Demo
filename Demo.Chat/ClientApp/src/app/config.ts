@@ -1,4 +1,5 @@
 
 export const config = {
-  apiUrl: 'https://localhost:44365'
+  apiUrl: 'api/',
+  url: '/'
 };

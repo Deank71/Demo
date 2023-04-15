@@ -20,7 +20,7 @@ export class FriendsService {
       .append("email", email)
 
 
-    return this.http.get<string>(`${config.apiUrl}/api/RequestFriend?email=${email}`)
+    return this.http.get<string>(`${config.apiUrl}RequestFriend?email=${email}`)
       .pipe(
         tap(request => request),
         mapTo(true),
@@ -32,16 +32,16 @@ export class FriendsService {
 
   getRequestedFriends(): Observable<Friend[]> {
     
-    return this.http.get<any>(`${config.apiUrl}/api/FriendRequest`);
+    return this.http.get<any>(`${config.apiUrl}FriendRequest`);
   }
 
   getActiveFriends(): Observable<Friend[]> {
-    return this.http.get<any>(`${config.apiUrl}/api/ActiveFriends`);
+    return this.http.get<any>(`${config.apiUrl}ActiveFriends`);
   }
 
   acceptRequestedFriends(requests: Friend[]): Observable<any> {
 
-    return this.http.post<any>(`${config.apiUrl}/api/AcceptRequest`, requests).pipe(
+    return this.http.post<any>(`${config.apiUrl}AcceptRequest`, requests).pipe(
       tap(request => request),
       mapTo(true),
       catchError(error => {
@@ -51,6 +51,6 @@ export class FriendsService {
   }
 
   deleteFriendrequest(id :number): Observable<any> {
-    return this.http.delete(`${config.apiUrl}/api/DeleteRequests`);
+    return this.http.delete(`${config.apiUrl}DeleteRequests`);
   }
 }
